@@ -1,0 +1,37 @@
+only dex-vmp windows
+集成ollvm混淆: https://github.com/DreamSoule/ollvm17
+
+将项目-protect提取出来
+将zipflinger提取src并删除修复文件夹漏洞
+删除mksrc，out文件夹
+修改gradle版本和build文件里的名称
+处理构造文件里的弃用的方法
+修改generateCSources里复制文件的步骤
+修改BuildNativeLib.java里的cmake位置改变so数量并换新版本
+修改vmsrc.zip里的so数量并替换so名合并虚拟机
+修改dexconfig里的主启动类和方法名
+
+//测试
+新建apptmp文件夹并修改使用目录
+添加测试apk到main.java里
+classAnalyzer.loadDexFile的new FileInputStream没有关闭有问题
+Dex2c.handleAllDex里也有这个问题导致缓存文件无法关闭
+修改后可以删除缓存文件
+只保留dex2c文件和dex文件
+
+//
+//支持的规则比较简单，*只是被转成正则表达式的.*，支持一些简单的继承关系
+//class * extends android.app.Activity
+//class * implements java.io.Serializable
+//class my.package.AClass
+//class my.package.* { *; }
+//class * extends java.util.ArrayList {
+//  if*;
+//}
+//class A {
+//}
+//class B extends A {
+//}
+//class C extends B {
+//}
+//比如'class * extends A' 只会匹配B而不会再匹配C
