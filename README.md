@@ -1,4 +1,4 @@
-#不直接编辑成最终产品  
+# 不直接编辑成最终产品  
 nmmp先只生成dex和c文件在windows上
 # nmmp
 基于dex-vm运行dalvik字节码从而对dex进行保护，增加反编译难度。
